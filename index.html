@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .container {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+    }
+    .box {
+      text-align: center;
+      justify-content: center;
+      flex-basis: 50%;
+      margin-left: 10px;
+    }
+    .result {
+      background-color: #ccc;
+    }
+    input {
+      width: 250px;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div class="box">
+        <input
+          id="atributo"
+          placeholder="atributo que quieres mostrar"
+          type="text"
+        />
+        <div id="resultado-busqueda">  
+        </div>
+      </div>
+      <div class="box result"></div>
+    </div>
+  </body>
+  <script>
+    // crear un html input de texto que te seleccione el atributo de un objecto
+    const persona = {
+      cedula: "17984648",
+      nombre: "Juan",
+      apellido: "Garcia",
+      imprimir: function imprimir() {
+        console.log("estoy imprimiendo en el objeto persona...");
+      },
+    };
+
+    function render() {
+      const resultElement = document.querySelector(".result");
+      const resultBusquedaElement = document.querySelector("#resultado-busqueda");
+      const inputElement = document.querySelector("#atributo");
+      inputElement.addEventListener('keypress', function(event) {
+        if(event.code === 'Enter') {
+            const valorDelInput = inputElement.value;
+           if(persona[valorDelInput]) {
+             console.log('lo lograste esta es la info', persona[valorDelInput])  
+           } else {
+            console.log('atributo incorrecto..')
+           }
+        }
+      });
+      resultElement.textContent = JSON.stringify(persona);
+      
+    }
+
+    render();
+  </script>
+</html>
